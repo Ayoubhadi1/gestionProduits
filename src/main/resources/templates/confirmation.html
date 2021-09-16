@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html	xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorator="template1"	
+>
+<!-- une fois en implemente layout:decorator on est plus besoin du head ansi que les links dans ce fichier -->
+<head>
+<meta charset="utf-8">
+<title>Page produits</title>
+
+</head>
+<body>
+
+<div layout:fragment="pageContent">
+	<div class="container">
+		<div class="card-header"><h4>Enregistrement effectué</h4></div>
+		<div class="card-body">
+			<div class="form-group">
+				<label>Id : </label>
+				<strong> <label th:text="${produit.id}"></label> </strong>
+			</div>
+			<div class="form-group">
+				<label>Nom : </label>
+				<strong><label th:text="${produit.name}"></label></strong>
+			</div>
+			<div class="form-group">
+				<label>Date d'expiration : </label>
+				<strong><label th:text="${produit.dateExp}"></label></strong>
+			</div>
+			<div class="form-group">
+				<label>Disponible : </label>
+				<strong><label th:text="${produit.disponible}"></label></strong>
+			</div>
+			<div class="form-group">
+				<label>Score : </label>
+				<strong><label th:text="${produit.score}"></label></strong>
+			</div>
+			
+		</div>
+	</div>
+	
+</div>
+
+
+</body>
+</html>

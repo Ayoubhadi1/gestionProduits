@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html	xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorator="template1"	
+>
+<!-- une fois en implemente layout:decorator on est plus besoin du head ansi que les links dans ce fichier -->
+<head>
+<meta charset="utf-8">
+<title>Page produits</title>
+
+</head>
+<body>
+
+<section layout:fragment="pageContent">
+	<div class="container mt-5">
+		<div class="card">
+			<div class="card-header">		
+				<h4 th:if="${mode == 'new'}">Ajouter un nouveau produit</h4>	<!-- <h4 th:if="${produit.id == null}">Ajouter un nouveau produit</h4> -->
+				<h4 th:if="${mode == 'edit'}">Modifier le produit</h4>
+			</div>
+			<div class="card-body">
+				<form th:action="@{saveProduit}" method="post">
+				
+				<div class="form-group">
+			<label class="control-label">Id : </label>
+			<label class="control-label" th:text="${produit.id}"></label>
+			<input type="hidden" class="form-control" name="id" th:value="${produit.id}">
+			
+		</div>
+		<div class="form-group">
+			<label class="control-label">Name : </label>
+			<input type="text" class="form-control" name="name" th:value="${produit.name}">
+			<span th:errors="${produit.name}" class="text-danger"></span>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label">Date d'expiration : </label>
+			<input type="date" class="form-control" name="dateExp" th:value="${produit.dateExp}">
+			<span th:errors="${produit.dateExp}" class="text-danger"></span>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label">Score : </label>
+			<input type="text" class="form-control" name="score" th:value="${produit.score}">
+			<span th:errors="${produit.score}" class="text-danger"></span>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label">Disponible : </label>
+			<input type="checkbox" class="ml-3 w-5" name="disponible" th:checked="${produit.disponible}">
+			<span th:errors="${produit.disponible}" class="text-danger"></span>
+		</div>
+		
+		<button class="btn btn-success" type="submit">Enregistrer</button>
+		</form>
+			</div>
+		</div>
+		
+	</div>
+</section>
+
+
+</body>
+</html>

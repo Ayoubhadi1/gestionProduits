@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html	xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorator="template1"	
+		xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" 
+>
+<!-- une fois en implemente layout:decorator on est plus besoin du head ansi que les links dans ce fichier -->
+<head>
+<meta charset="utf-8">
+<title>Page produits</title>
+
+</head>
+<body>
+
+<section layout:fragment="pageContent">
+	<div class="container mt-3">
+<div class="card">
+	<div class="card-header">Liste des produits</div>
+	<div class="card-body">
+	<form method="get" th:action="@{produits}" >
+		<div class="form-group">
+			<label>Nom</label>
+			<input type="text" name="keyword" th:value="${keyword}">
+			<button class="btn btn-success">Chercher</button>
+		</div>
+	
+	</form>
+		<table class="table">
+	<tr>
+		<th>ID</th>
+		<th>Nom</th>
+		<th>Date d'expiration</th>
+		<th>disponible</th>
+		<th>score</th>
+	</tr>
+	<tr th:each="p:${produits}">
+	<td th:text="${p.id}"></td>
+	<td th:text="${p.name}"></td>
+	<td th:text="${p.dateExp}"></td>
+	<td th:text="${p.disponible}"></td>
+	<td th:text="${p.score}"></td>
+	<td sec:authorize="hasRole('ROLE_ADMIN')">	
+			<a onclick="return confirm('Etes vous sur de vouloir supprimer')" class="btn btn-danger mr-4" th:text="Delete" th:href="@{deleteProduit(id=${p.id} , keyword=${keyword} , page=${currentPage} , size=${size})}"></a>
+			<a class="btn btn-warning" th:href="@{editProduit(id=${p.id})}">Edit</a>
+	</td>
+	</tr>
+</table>
+<ul class="nav nav-pills">
+	<li th:each="pg,status:${pages}">
+		<a th:class="${currentPage == status.index?'btn btn-primary':'btn'}" th:href="@{produits(page=${status.index} , keyword=${keyword} , size=${size})}" th:text="${status.index}"></a>
+	</li>
+</ul>
+	</div>
+</div>
+</div>
+</section>
+
+
+</body>
+</html>
