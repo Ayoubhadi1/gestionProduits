@@ -8,7 +8,7 @@ pipeline{
 
         steps{
             echo 'building the application ...'
-            echo 'the application built 3...'
+            echo 'the application built 7...'
         }	
      }
 
